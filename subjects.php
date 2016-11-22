@@ -1,16 +1,11 @@
-<html>
+<?php 
+    include "header.php";
+?>
+<script>
     
-    <head>
-         
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <link href='https://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
-        <title>Vantage</title>
-        
-        <script src="https://www.gstatic.com/firebasejs/3.2.0/firebase.js"></script>
-        <script src="main.js"></script>
-        <script>
-        var subjectRef = firebase.database().ref('subjects');
+    document.getElementById("sub").style = "";
+    
+    var subjectRef = firebase.database().ref('subjects');
         subjectRef.on('value', function(snapshot) {
             var subjects = [];
             var data = snapshot.val();
@@ -29,30 +24,42 @@
                 var result = subject.subjects.split(",");
                 var classes;
 
-                document.getElementById("subjects").innerHTML += "<div class='card' style='padding-bottom: 50px;'><div style='font-size: 20px;'>"+ subject.name +"</div>";
+                document.getElementById("subjects").innerHTML += "<div class='none' style='padding-bottom: 50px; '><div style='font-size: 20px;'>"+ subject.name +"</div>";
                 for (i=0; i<result.length; i++){
                     var classes = result[i];
                     document.getElementById("subjects").innerHTML += "<a href='answer.php?subject="+ classes +"' style='position: relative; bottom: 30px; display: inline; color: green;' id='hover'>"+ classes +"</a> &nbsp;";
                 }
 
-                document.getElementById("subjects").innerHTML += "<div class=''></div><hr></div>";
-
                 console.log(subjects.subjects);
             });
         }   
-        </script>
-    </head>
-    
-    <body style="font-family: Roboto; background-color: #EEEEEE;">
-        <?php include "header.php"; ?>
-        <center><br><br><br><p style="font-size: 30px;"></p>
-            
-            Pick a subject to answer questions<br><br>
-            
-            <div id="subjects">
-                <i>Loading...</i>
+</script>
+<style>
+.none {
+    width: 40%;
+    height: auto;
+    padding: 10px;
+    border: none;
+    box-shadow: 0px 1px 2px #424242;
+    background-color: lightgrey;
+    opacity: 0.6;
+    border-radius: 0px;
+    z-index: 0;
+    border-bottom: 0.5px solid #E0E0E0;
+    font-family: Roboto;
+}
+</style>
+<br>
+        <center>
+            <div id="asking_box" class="modal">
+                <div class="card" style="box-shadow: none; color: black;"><a onclick="ask();">x</a>
+                    <center>Download the iOS or Android app to ask questions!</center>
+                </div>
+                <br>
+            </div>
+            <div style="position: relative; left: 9%;">
+                <div id="subjects"></div>
             </div>
         </center>
     </body>
-    
 </html>

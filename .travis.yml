@@ -14,3 +14,4 @@ deploy:
  on:
   repo: parthsaxena/vantage-web
   branch: master 
+

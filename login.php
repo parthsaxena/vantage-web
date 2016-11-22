@@ -3,7 +3,7 @@
     <head>
         <title>Vantage | Login</title>
         
-        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
         
         <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
 
@@ -19,7 +19,7 @@
             
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
-                location.href = "/";
+                location.href = "/vrd";
             } 
             else {
 
@@ -77,7 +77,7 @@
                 
                     firebase.auth().onAuthStateChanged(function(user) {
                         if (user) {
-                            location.href = "/";
+                            location.href = "/vrd";
                         } 
                         else {
 
