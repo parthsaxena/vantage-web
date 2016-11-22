@@ -1,4 +1,4 @@
-<?php 
+<?php
     include "header.php";
 ?>
 <br>
@@ -12,87 +12,88 @@
                 <br>
             </div>
 <script>
-    
-   
-    
+
+
+
     function close_ask(){
         $("#asking_box").toggle();
     }
-    
+
     function close_q(){
         $("#question_box").toggle();
     }
-    
+
     function test(id){
         $("a[href='#top']").click(function() {
           $("html, body").animate({ scrollTop: 0 }, "slow");
           return false;
         });
-        
-        
-        console.log(id);       
+
+
+        console.log(id);
         // Posts
             firebase.auth().onAuthStateChanged(function(user) {
-            
+
                 var postsRef = firebase.database().ref('posts');
                 postsRef.orderByChild("id").equalTo(id).on('value', function(snapshot) {
                     var posts = [];
                     var data = snapshot.val();
-                    for (post in data) {                       
+                    for (post in data) {
+                        console.log("DATA INCOMING: " + data[post]);
                         posts.push(data[post]);
-                    }                 
+                    }
                     posts.reverse();
                     console.log(posts);
                     refreshUI(posts);
                 });
-                
-                
+
+
                 function refreshUI(posts){
                     posts.forEach(function(post){
-                        
+
                         var storageRef = firebase.storage().ref();
-                        
+
                         var imageRef = storageRef.child('images/'+ post.image);
 
                         imageRef.getDownloadURL().then(function(url){
-                        var image = url; 
-                        console.log(image);    
-                        
+                        var image = url;
+                        console.log(image);
+
                            document.getElementById("inq").innerHTML = "";
-                        
+
                            document.getElementById("inq").innerHTML += "<div class='card-p' id='post-"+post.id+"' style='padding-bottom: -20px;'><div style='text-align: left; padding-left: 2%; text-align: left;'><div style='float: right; padding-right: 2%; font-size: 14px;'><i>"+ display_ts(post.createdAt) +"</i></div><div style='font-size: 20px; max-width: 400px;'>"+ post.title +"<br><p style='font-size: 16px;'>"+ post.content +"</p></div><center><div id='load'><i>Loading...</i></div><br><br>"
-                           
-                           
+
+
                            setTimeout(
-                          function() 
+                          function()
                           {
-                            
+
                             if (image == "https://firebasestorage.googleapis.com/v0/b/vantage-e9003.appspot.com/o/images%2FNO_IMAGE_WHITE.jpg?alt=media&token=ccaafe7a-6ed8-4f57-a4c2-7e7b9f5365d1"){
                                 document.getElementById("load").innerHTML = "";
                             }
                             else {
                                 document.getElementById("load").innerHTML = "<img onclick=\"popup_image('" + image + "')\" src='"+ image +"' class='post_image' style='text-align: center; max-height: 300px;'>";
                             }
-                            
+
                             //$('#load').slideTop("slow");
-                            
+
                           }, 1000);
                            /*document.getElementById("load").innerHTML = "<img src='"+ image +"' class='post_image' style='text-align: center;'>";*/
-                           
+
                            document.getElementById("inq").innerHTML += "</center><br><a id='num_answers' href='question.php?id="+ post.id +"' style='padding-top: 10px; font-size: 14px; color: green; position: relative; top: 5px;'></a></div></div>";
-                           
+
                            //$('#answers').show();
-                            
+
                         });
-                        
+
                         firebase.auth().onAuthStateChanged(function(user) {
                         var answersRef = firebase.database().ref('answers');
                         answersRef.orderByChild("inquiryID").equalTo(id).on('value', function(snapshot) {
                             var answers = [];
                             var data = snapshot.val();
-                            for (answer in data) {                       
+                            for (answer in data) {
                                 answers.push(data[answer]);
-                            }                 
+                            }
                             answers.reverse();
                             console.log(answers);
                             a_refreshUI(answers);
@@ -110,16 +111,16 @@
                                 var imageRef = storageRef.child('images/'+ answer.image);
 
                                 imageRef.getDownloadURL().then(function(url){
-                                var image = url; 
+                                var image = url;
 
                                 console.log(user.uid);
 
                                       //document.getElementById("answers").innerHTML = "";
-                                      document.getElementById("answers2").innerHTML = "<div class='card-p' style='padding-bottom: -20px;'><div style='text-align: left; padding-left: 2%; text-align: left;'><div style='float: right; padding-right: 2%; font-size: 14px;'><i>"+ display_ts(answer.createdAt) +"</i></div><div style='font-size: 20px; max-width: 400px;'><br><p style='font-size: 16px;'>"+ answer.content +"</p><div id='load_a' style='font-size: 15px;'><i>Loading...</i></div><br>"; 
-                                    
-                                      
+                                      document.getElementById("answers2").innerHTML = "<div class='card-p' style='padding-bottom: -20px;'><div style='text-align: left; padding-left: 2%; text-align: left;'><div style='float: right; padding-right: 2%; font-size: 14px;'><i>"+ display_ts(answer.createdAt) +"</i></div><div style='font-size: 20px; max-width: 400px;'><br><p style='font-size: 16px;'>"+ answer.content +"</p><div id='load_a' style='font-size: 15px;'><i>Loading...</i></div><br>";
+
+
                                        setTimeout(
-                                      function() 
+                                      function()
                                       {
 
                                         if (image == "https://firebasestorage.googleapis.com/v0/b/vantage-e9003.appspot.com/o/images%2FNO_IMAGE_WHITE.jpg?alt=media&token=ccaafe7a-6ed8-4f57-a4c2-7e7b9f5365d1"){
@@ -130,7 +131,7 @@
                                         }
 
                                       }, 1000);
-                                    
+
                                        document.getElementById("answers2").innerHTML += "</div></div>";
 
                                       console.log(answer.content);
@@ -141,14 +142,14 @@
                             }
 
                         });
-                        
+
                     });
                 }
             });
-        
+
         $("#question_box").show();
     }
-    
+
     firebase.auth().onAuthStateChanged(function(user) {
                         var current_user = firebase.auth().currentUser;
                         var email = current_user.email;
@@ -168,8 +169,8 @@
                         refreshUI(posts);
                     });
 
-                    
-                    
+
+
                     function refreshUI(posts) {
 
                         document.getElementById("user_posts").innerHTML = "";
@@ -230,7 +231,7 @@
                         }
                     });
 </script>
-            
+
             <div id="asking_box" class="modal">
                 <div class="card-p" style="box-shadow: none; border: none;"><a onclick="close_ask();" style="float: right; position: relative; bottom: 12px; font-weight: 600; color: black;">x</a></div>
                 <div class="card-p" style="box-shadow: none;" style="position: absolute; background-color: rgba(0, 0, 0, 0.4); bottom: 20px;">
@@ -239,7 +240,7 @@
                 <br>
                 <br>
             </div>
-            
+
             <div style="position: relative; left: 9%;">
                 <button style="font-size: 18px; text-align: left;" class="none">Your Questions</button>
                 <div id="user_posts">
