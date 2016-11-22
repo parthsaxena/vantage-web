@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+ - 0.12
+deploy:
+ provider: elasticbeanstalk
+ access_key_id: AKIAJAZDXP7AAJJQ5M3A
+ secret_access_key:
+  secure: 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
+ region: us-east-1
+ app: vantage-web
+ env: LowCost-env
+ bucket_name: elasticbeanstalk-us-east-1-382017533576
+ on:
+  repo: vantage-web
+  branch: master 
