@@ -12,5 +12,5 @@ deploy:
  env: LowCost-env
  bucket_name: elasticbeanstalk-us-east-1-382017533576
  on:
-  repo: vantage-web
+  repo: parthsaxena/vantage-web
   branch: master 
