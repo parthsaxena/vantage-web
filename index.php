@@ -42,6 +42,12 @@
                         console.log("DATA INCOMING: " + data[post]);
                         posts.push(data[post]);
                     }
+                    for (var i = 0; i < posts.length; i++) {
+                      if (posts[i]["active"] != "true") {
+                        console.log("ACTIVE NOT TRUE")
+                        posts.splice(i, 1);
+                      }
+                    }
                     posts.reverse();
                     console.log(posts);
                     refreshUI(posts);
