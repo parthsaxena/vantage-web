@@ -7,11 +7,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
          <script src="https://www.gstatic.com/firebasejs/3.2.0/firebase.js"></script>
         <script>
-            
+
             function note(){
                 $("#note").toggle();
             }
-            
+
             // Initialize Firebase
             var config = {
                 apiKey: "AIzaSyA62_N7yggbFRkiX5e291axflf-CYDAM3E",
@@ -20,31 +20,31 @@
                 storageBucket: "vantage-e9003.appspot.com",
             };
             firebase.initializeApp(config);
-            
-            $(document).ready(function() { 
+
+            $(document).ready(function() {
                 //$("#side").show();
                 $("#asking_box").hide();
                 $("#ask_ask").hide();
                 $("#question_box").hide();
             });
-            
+
             function change_search(){
                 document.getElementById("q").placeholder = "Type in Subject";
             }
-            
+
             function toggle(){
                 $("#side").toggle();
             }
-            
+
             function ask(){
                 $("#asking_box").toggle();
             }
-            
+
             function ask_next(){
                 $("#ask_subject").hide();
                 $("#ask_ask").show();
             }
-            
+
             function display_ts(date_posted) {
                 var time_elapsed = Date.now() - date_posted;
                 var minutes = Math.round(time_elapsed/60000);
@@ -52,9 +52,9 @@
                 var days = Math.round(hours/24);
                 var weeks = Math.round(days/7);
                 var years = Math.round(weeks/52);
-                
+
                 var tsStr = 'a moment ago';
-                
+
                 if (years > 1) {
                     tsStr = years + ' years ago';
                 } else if (weeks > 1) {
@@ -70,10 +70,10 @@
                 } else if (minutes < 1){
                     return tsStr;
                 }
-                
+
                 return tsStr;
             }
-            
+
             function check_user() {
                 // Check if user is logged in
                 firebase.auth().onAuthStateChanged(function(user) {
@@ -87,25 +87,25 @@
 
                     if (user) {
                        //document.write(uid);
-                    } 
+                    }
 
                     else {
                        location.href = "login.php";
                     }
                 });
             }
-            
+
             //check_user();
-            
+
             function sign_out(){
                 firebase.auth().signOut().then(function() {
                   console.log('Signed Out');
-                    location.href = "/vrd/login.php";
+                    location.href = "login.php";
                 }, function(error) {
                   console.error('Sign Out Error', error);
                 });
             }
-            
+
         </script>
     </head>
     <body>

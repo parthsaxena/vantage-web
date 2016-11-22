@@ -197,6 +197,7 @@
 
                         posts.forEach(function(post) {
 
+                            if (post.active == "true") {
                             var storageRef = firebase.storage().ref();
 
                             var imageRef = storageRef.child('images/'+ post.image);
@@ -232,7 +233,7 @@
 
 
                             console.log("Number of inq: "+ posts.length);
-
+                          }
                         });
                         }
                     });
