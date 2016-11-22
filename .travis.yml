@@ -6,6 +6,7 @@ php:
  - '7.0'
  - hhvm
  - nightly
+script: build.sh
 deploy:
  provider: elasticbeanstalk
  access_key_id: AKIAJAZDXP7AAJJQ5M3A
