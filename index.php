@@ -188,7 +188,7 @@
                             post = posts[i];
                             //var post_key = snapshot.name();
                             //document.getElementById("user_posts").innerHTML = "";
-                            if (post.active == "true") {
+                            if (post[active] == "true") {
                               document.getElementById("user_posts").innerHTML += "<button class='card' id='post-"+post.id+"' onclick=\"test('" + post.id + "')\"><div style='text-align: left; padding-left: 2%; text-align: left;'><div style='float: right; padding-right: 2%; font-size: 14px;'><i>"+ display_ts(post.createdAt) +"</i></div><div style='font-size: 20px; max-width: 400px;'>"+ post.title +"</div><a id='num_answers_"+  post.id +"' style='padding-top: 10px; font-size: 14px; color: green; position: relative; top: 5px;'>0 Answers</a></div></button><!--<a style='padding-top: 10px; font-size: 14px; color: red; position: relative; top: 5px; right: 10px;' onClick=\"delete_post('" + post.id + "')\">Discard</a>--><br>";
                             }
                         }
