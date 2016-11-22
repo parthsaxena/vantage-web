@@ -77,7 +77,7 @@
 
                     firebase.auth().onAuthStateChanged(function(user) {
                         if (user) {
-                            location.href = "/vrd";
+                            location.href = "index.php";
                         }
                         else {
 
