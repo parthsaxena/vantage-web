@@ -1,0 +1,76 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto);
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+input {
+    font-size: 15px;
+}
+
+body>header { 
+  background: url("../images/blur.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: block;
+}
+
+.background {
+    background-image: url(../images/blur.jpg);
+    position: fixed;
+    height: 100%;
+    width: 100%;
+}
+
+.container {
+    position: relative;
+    top: 20%;
+}
+
+.register_elements {
+    font-family: Roboto;
+    width: 40%;
+    height: 50px;
+    padding-left: 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background: none;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: white;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: white;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: white;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: white;
+}
+
+button {
+    font-family: Roboto;
+    width: 80px;
+    height: 40px;
+    font-size: 15px;
+    background: white;
+    border: none;
+    border-radius: 5px;
+}
+
+body {
+        @import url(http://fonts.googleapis.com/css?family=Roboto);
+
+        * {
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        background: lightgrey;
+        
+        overflow-x: hidden;
+    }
+    
